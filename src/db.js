@@ -106,11 +106,23 @@ class Db {
   async getUser(login) {
     return await this._db.all(`select * from "users" where login = ?`, [login]);
   }
+  async getUserById(id) {
+    return (
+      (await this._db.all(`select * from "users" where id = ?`, [id]))[0] ||
+      null
+    );
+  }
   async deleteUser() {}
 
   async addGroup() {}
   async getGroup() {
     return this._db.all('select * from "group"');
+  }
+  async getGroupById(id) {
+    return (
+      (await this._db.all(`select * from "group" where id = ?`, [id]))[0] ||
+      null
+    );
   }
   async deleteGroup() {}
 

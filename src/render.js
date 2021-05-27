@@ -33,6 +33,9 @@ async function renderPdf(dir_name, template) {
         cwd: path.join("/tmp", "render", dir_name),
       }
     );
+    process.on("message", (message) => {
+      console.log(message);
+    });
     process.on("exit", () => {
       console.log(`PDF успешно сгенерирован ${dir_name}`);
       resolve();

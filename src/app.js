@@ -145,12 +145,34 @@ const main = async () => {
       return;
     }
 
-    const { template, student_id } = req.body;
+    let { template, student_id } = req.body;
 
-    const id = await db.createTemplate(template, student_id);
+    const maybe_user = await db.getUserById(student_id);
+    if (!maybe_user || !maybe_user.group) {
+      res.status(500);
+      res.send({ error: "Студент не найден или не принадлежит группе" });
+      return;
+    }
+
+    const maybe_group = await db.getGroupById(maybe_user.group);
+    if (!maybe_group) {
+      res.status(500);
+      res.send({ error: "Группа не найдена" });
+      return;
+    }
+
+    let new_template = template
+      .replace(/\$\{group\}/gi, maybe_group.name)
+      .replace(
+        /\$\{student\}/gi,
+        `${maybe_user.second_name} ${maybe_user.first_name} ${maybe_user.third_name}`
+      );
+    console.log(new_template);
+
+    const id = await db.createTemplate(new_template, student_id);
 
     const template_id = uuid();
-    await renderPdf(template_id, template);
+    await renderPdf(template_id, new_template);
 
     await db.addPathToTemplate(
       id,
