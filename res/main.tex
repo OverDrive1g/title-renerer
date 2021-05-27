@@ -11,7 +11,7 @@
 % \usepackage{times}
 \usepackage{mathptmx}
 \usepackage{graphicx}
-\graphicspath{{images/},{plant-uml/}}
+\graphicspath{{images/}}
 
 \renewcommand{\baselinestretch}{1.5}
 \parindent 1cm % Абзацный отступ
@@ -65,36 +65,13 @@
 \usepackage{tocloft}
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}% точечки в содержании
 
-% заюзать если потребуют убрать отступы в в содержании
-% \usepackage{titletoc}
-
-%     \titlecontents{chapter}
-%     [0em] %
-%     {\medskip\bfseries}
-%     {\thecontentslabel\quad}%numbered chapters
-%     {}%numberless chapter
-%     {\hfill\contentspage}
-
-%     \titlecontents{section}[1.72em]{\smallskip}%
-%     {\thecontentslabel.\enspace}%numbered sections
-%     {}%numberless section
-%     {\titlerule*[1.3pc]{.}\contentspage}%
-
 \begin{document}
 
 
 \input{title.tex}
 
 \setcounter{page}{2}
-% \tableofcontents
+
 \clearpage
-
-% \input{chapters/0-introduction}
-% \input{chapters/1-chapter}
-% \input{chapters/2-chapter}
-% \input{chapters/3-chapter}
-% \input{chapters/4-conclusion}
-% \input{chapters/0-bibliography}
-
 
 \end{document}
